@@ -37,6 +37,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <cstdlib>
 
 int *pArgc = NULL;
 char **pArgv = NULL;
@@ -113,6 +114,11 @@ int main(int argc, char **argv) {
     }
     printf("\n");
 
+    /* Print out CUDA_VISIBLE_DEVICES */
+    const char* env_p = std::getenv("CUDA_VISIBLE_DEVICES");
+    printf("  CUDA_VISIBLE_DEVICES:                          %s\n", env_p);
+
+    // How do we determine if we are a MIG device?
 
     // TODO: Print nvidia device files
 
