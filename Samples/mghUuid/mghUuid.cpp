@@ -100,6 +100,24 @@ int main(int argc, char **argv) {
     cudaGetDeviceProperties(&deviceProp, dev);
 
     printf("\nDevice %d: \"%s\"\n", dev, deviceProp.name);
+    printf("  UUID:                                          ");
+    for (int i = 0; i < 16; ++i) {
+      if ((i == 4) || (i == 6)|| (i == 8)|| (i == 10))
+        printf("-");
+      /*
+       * Need to cast to unsigned char, or else we'll get sign extension when
+       * using the %x modifier:
+       * https://stackoverflow.com/questions/3555791/why-does-printf-not-print-out-just-one-byte-when-printing-hex
+       */
+      printf("%x", (unsigned char)(deviceProp.uuid.bytes[i]));
+    }
+    printf("\n");
+
+
+    // TODO: Print nvidia device files
+
+    // TODO: Test access of nvidia device files
+
 
     // Console log
     cudaDriverGetVersion(&driverVersion);
